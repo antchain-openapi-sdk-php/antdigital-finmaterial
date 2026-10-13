@@ -19,6 +19,7 @@ class WebItem extends Model {
         'author' => 'author',
         'logoUrl' => 'logo_url',
         'contentFormats' => 'content_formats',
+        'trustyLevel' => 'trusty_level',
     ];
     public function validate() {
         Model::validateRequired('id', $this->id, true);
@@ -26,6 +27,7 @@ class WebItem extends Model {
         Model::validateRequired('sortId', $this->sortId, true);
         Model::validateRequired('title', $this->title, true);
         Model::validateRequired('summary', $this->summary, true);
+        Model::validateRequired('trustyLevel', $this->trustyLevel, true);
     }
     public function toMap() {
         $res = [];
@@ -64,6 +66,9 @@ class WebItem extends Model {
         }
         if (null !== $this->contentFormats) {
             $res['content_formats'] = $this->contentFormats;
+        }
+        if (null !== $this->trustyLevel) {
+            $res['trusty_level'] = $this->trustyLevel;
         }
         return $res;
     }
@@ -108,6 +113,9 @@ class WebItem extends Model {
         }
         if(isset($map['content_formats'])){
             $model->contentFormats = $map['content_formats'];
+        }
+        if(isset($map['trusty_level'])){
+            $model->trustyLevel = $map['trusty_level'];
         }
         return $model;
     }
@@ -194,5 +202,12 @@ class WebItem extends Model {
      * @var string
      */
     public $contentFormats;
+
+    // 可信等级，取值低/中/高
+    /**
+     * @example 中
+     * @var string
+     */
+    public $trustyLevel;
 
 }
